@@ -1,10 +1,10 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <h1>Hello World!</h1>
+      <h1>Blog Posts:</h1>
       <ul>
         <li v-for="post in posts" :key="post.slug">
-          {{ post.title }}
+          {{ post.title }}(slug: {{ post.slug }})
         </li>
       </ul>
     </v-flex>

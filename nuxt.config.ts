@@ -1,4 +1,5 @@
 import { Configuration } from '@nuxt/types'
+require('dotenv').config()
 
 const config: Configuration = {
   mode: 'universal',
@@ -24,10 +25,13 @@ const config: Configuration = {
     '@nuxtjs/vuetify',
     '@nuxt/typescript-build'
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/dotenv'],
   axios: {},
   vuetify: {
     customVariables: ['~/assets/variables.scss']
+  },
+  dotenv: {
+    systemvars: true
   }
 }
 
