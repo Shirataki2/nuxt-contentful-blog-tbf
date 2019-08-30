@@ -1,22 +1,23 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <h1>Blog Posts:</h1>
-      <ul>
-        <li v-for="post in posts" :key="post.slug">
-          {{ post.title }}(slug: {{ post.slug }})
-        </li>
-      </ul>
-    </v-flex>
-  </v-layout>
+  <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs12 sm8>
+        <Posts :posts="posts" gridstyle="xs12 lg6" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import contentful from '@/plugins/contentful'
+import Posts from '@/components/Posts.vue'
 @Component({
+  components: {
+    Posts
+  },
   async asyncData () {
-    const posts = await contentful.getAllPosts()
+    const posts = await contentful.getAllPosts(4)
     return { posts }
   }
 })

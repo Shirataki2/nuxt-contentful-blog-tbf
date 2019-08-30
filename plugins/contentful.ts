@@ -40,13 +40,24 @@ class ContentfulAPI {
     })
   }
 
-  async getAllPosts () {
+  async getAllPosts (limit: number = 100) {
     const data: EntryCollection<PostProps> = await this.client.getEntries({
+      limit,
       content_type: ContentType.post,
       order: '-sys.updatedAt'
     })
     const posts = data.items.map(post => new Post(post))
     return posts
+  }
+
+  async getPost (slug: string) {
+    const data: EntryCollection<PostProps> = await this.client.getEntries({
+      'fields.slug': slug,
+      content_type: ContentType.post,
+      order: '-sys.updatedAt'
+    })
+    const post = new Post(data.items[0])
+    return post
   }
 }
 

@@ -19,7 +19,7 @@ const config: Configuration = {
   },
   loading: { color: '#fff' },
   css: [],
-  plugins: ['@/plugins/contentful.ts'],
+  plugins: ['@/plugins/contentful.ts', '@/plugins/markdownit.ts'],
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
