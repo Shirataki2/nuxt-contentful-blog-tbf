@@ -13,7 +13,7 @@
           color="blue darken-3"
           dark
           link
-          @click="go(`/tags/${tag}`)"
+          @click="$router.push(`/tags/${tag}`)"
         >
           {{ tag }}
         </v-chip>
@@ -22,7 +22,7 @@
     <v-container>
       <v-layout row wrap>
         <!-- eslint-disable-next-line -->
-        <v-flex xs12 md8 offset-md2 class="md" v-html="$md.render(post.text)" />
+        <v-flex xs12 md10 offset-md1 class="md" v-html="$md.render(post.text)" />
       </v-layout>
     </v-container>
   </div>
@@ -33,12 +33,19 @@ import { Vue, Component } from 'vue-property-decorator'
 import contentful, { Post } from '@/plugins/contentful'
 
 @Component({
-  async asyncData ({ params }) {
-    const post: Post = await contentful.getPost(params.slug)
+  async asyncData ({ error, params }) {
+    const post: Post | null = await contentful.getPost(params.slug)
+    if (!post) {
+      error({ statusCode: 404, message: 'Page not Found' })
+    }
     return { post }
   }
 })
-export default class PostPage extends Vue {}
+export default class PostPage extends Vue {
+  mounted () {
+    this.$highlight()
+  }
+}
 </script>
 
 <style lang="scss">

@@ -15,11 +15,18 @@ const config: Configuration = {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css'
+      }
+    ]
   },
   loading: { color: '#fff' },
   css: ['@/assets/main.scss'],
-  plugins: ['@/plugins/contentful.ts', '@/plugins/markdownit.ts'],
+  plugins: ['@/plugins/contentful.ts', '@/plugins/markdownit.ts', '@/plugins/prismjs.ts'],
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',

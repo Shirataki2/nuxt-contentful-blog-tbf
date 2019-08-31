@@ -56,6 +56,9 @@ class ContentfulAPI {
       content_type: ContentType.post,
       order: '-sys.updatedAt'
     })
+    if (data.items.length === 0) {
+      return null
+    }
     const post = new Post(data.items[0])
     return post
   }

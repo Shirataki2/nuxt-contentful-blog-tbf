@@ -1,44 +1,42 @@
 <template>
   <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
+    <v-container>
+      <v-layout row wrap>
+        <v-flex
+          xs12
+          offset-sm2
+        >
+          <h1 class="display-4">
+            {{ error.statusCode }}
+          </h1>
+          <h2 class="display-2">
+            {{ error.message }}
+          </h2>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-app>
 </template>
 
-<script>
-export default {
-  layout: 'empty',
-  props: {
-    error: {
-      type: Object,
-      default: null
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+
+interface ErrorProp {
+  statusCode: number
+  message: string
+}
+
+@Component({
+  layout: 'empty'
+})
+export default class Error extends Vue {
+  @Prop({
+    type: Object,
+    default: {
+      statusCode: 400,
+      message: 'An Error Occured'
     }
-  },
-  head () {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title
-    }
-  },
-  data () {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
-  }
+  })
+  error!: ErrorProp
 }
 </script>
-
-<style scoped>
-h1 {
-  font-size: 20px;
-}
-</style>
