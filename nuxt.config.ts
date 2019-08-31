@@ -18,20 +18,33 @@ const config: Configuration = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   loading: { color: '#fff' },
-  css: [],
+  css: ['@/assets/main.scss'],
   plugins: ['@/plugins/contentful.ts', '@/plugins/markdownit.ts'],
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
     '@nuxt/typescript-build'
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@nuxtjs/dotenv'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
+  ],
   axios: {},
   vuetify: {
     customVariables: ['~/assets/variables.scss']
   },
   dotenv: {
     systemvars: true
+  },
+  build: {
+    loaders: {
+      scss: {
+        implementation: require('sass'),
+        fiber: require('fibers')
+      }
+    }
   }
 }
 
