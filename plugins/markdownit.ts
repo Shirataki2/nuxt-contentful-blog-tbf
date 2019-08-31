@@ -18,8 +18,8 @@ const markdownItPlugin: Plugin = (_, inject) => {
   md.use(require('markdown-it-footnote'))
   md.use(require('markdown-it-sanitizer'))
   md.use(require('@leetcode/markdown-it-anchor'))
-  md.use(require('markdown-it-table-of-contents'))
   md.use(require('@iktakahiro/markdown-it-katex'))
+  md.use(require('markdown-it-table-of-contents'))
   inject('md', md)
 }
 
