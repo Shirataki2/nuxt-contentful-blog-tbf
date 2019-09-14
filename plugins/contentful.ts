@@ -40,14 +40,57 @@ class ContentfulAPI {
     })
   }
 
-  async getAllPosts (limit: number = 100) {
+  async getAllPosts (limit: number = 100, skip: number = 0) {
     const data: EntryCollection<PostProps> = await this.client.getEntries({
+      skip,
       limit,
       content_type: ContentType.post,
       order: '-sys.updatedAt'
     })
     const posts = data.items.map(post => new Post(post))
     return posts
+  }
+
+  async searchPosts (
+    query: string,
+    limit: number = 1000,
+    skip: number = 0
+  ) {
+    const data: EntryCollection<PostProps> = await this.client.getEntries({
+      skip,
+      limit,
+      content_type: ContentType.post,
+      'fields.text[match]': query,
+      order: '-sys.updatedAt'
+    })
+    const posts = data.items.map(post => new Post(post))
+    const length = data.total
+    return { posts, length }
+  }
+
+  async getPagePosts (limit: number = 5, skip: number = 0) {
+    const data: EntryCollection<PostProps> = await this.client.getEntries({
+      skip,
+      limit,
+      content_type: ContentType.post,
+      order: '-sys.updatedAt'
+    })
+    const posts = data.items.map(post => new Post(post))
+    const length = data.total
+    return { posts, length }
+  }
+
+  async getTagPosts (tag: string, limit: number = 5, skip: number = 0) {
+    const data: EntryCollection<PostProps> = await this.client.getEntries({
+      skip,
+      limit,
+      content_type: ContentType.post,
+      'fields.tags': tag,
+      order: '-sys.updatedAt'
+    })
+    const posts = data.items.map(post => new Post(post))
+    const length = data.total
+    return { posts, length }
   }
 
   async getPost (slug: string) {

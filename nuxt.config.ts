@@ -52,6 +52,9 @@ const config: Configuration = {
         fiber: require('fibers')
       }
     }
+  },
+  transition: {
+    name: 'layout'
   }
 }
 

@@ -4,6 +4,19 @@
       <v-flex xs12 sm8>
         <Posts :posts="posts" gridstyle="xs12 lg6" />
       </v-flex>
+      <v-flex xs12 sm4>
+        <v-text-field
+          v-model="query"
+          name="query"
+          label="検索"
+        >
+          <template v-slot:append>
+            <v-btn color="primary" text @click="search">
+              GO!
+            </v-btn>
+          </template>
+        </v-text-field>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -21,5 +34,11 @@ import Posts from '@/components/Posts.vue'
     return { posts }
   }
 })
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  query: string = ''
+
+  search () {
+    this.$router.push(`/search?q=${this.query}&page=1`)
+  }
+}
 </script>
