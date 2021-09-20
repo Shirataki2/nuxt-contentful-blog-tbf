@@ -27,7 +27,7 @@
     "markdown-it-sanitizer": "^0.4.3",
     "markdown-it-table-of-contents": "^0.4.4",
     "nuxt": "^2.0.0",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.25.0",
     "vue-property-decorator": "^8.2.1"
   },
   "devDependencies": {
